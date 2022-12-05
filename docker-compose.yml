@@ -1,0 +1,21 @@
+version: '3.6'
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - nginx_conf:/etc/nginx/conf.d:rw
+      - nginx_vhost:/etc/nginx/vhost.d:rw
+      - nginx_html:/usr/share/nginx/html:ro
+      - ./certs:/etc/nginx/certs
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    network_mode: bridge
+    labels:
+      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
+volumes:
+  nginx_html:
+  nginx_vhost:
+  nginx_conf:

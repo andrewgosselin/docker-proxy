@@ -17,5 +17,6 @@ if [[ $version == *"not found"* ]]; then
   esac
 fi
 
+mkdir certs
 cd certs
 mkcert "$1"
